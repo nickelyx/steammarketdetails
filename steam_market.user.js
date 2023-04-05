@@ -12,7 +12,7 @@
 (function() {
     'use strict';
 
-    var scriptData = document.querySelector('#responsive_page_template_content > script:nth-child(6)').firstChild.data;
+    var scriptData = document.querySelectorAll('#responsive_page_template_content > script')[1].firstChild.data;
     var rawPlotData = scriptData.split("var line1=")[1].split(";")[0];
 
     var dailySales = [];
