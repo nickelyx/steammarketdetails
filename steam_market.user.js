@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         Total Steam Market Item Sales
+// @name         Steam Market Item Sales
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  nickely was here
 // @author       nickely
 // @match        https://steamcommunity.com/market/listings/*
@@ -20,6 +20,12 @@
     var monthlySales = [];
     var yearlySales = [];
     var totalSales = [];
+
+	var dailySalesCount = 0
+    var weeklySalesCount = 0
+    var monthlySalesCount = 0
+    var yearlySalesCount = 0
+    var totalSalesCount = 0
 
     var today = new Date();
     var daily = new Date(today).setDate(today.getDate() - 1);
@@ -43,12 +49,19 @@
         }
         totalSales.push(parseInt((el[2])));
     });
-
-    var dailySalesCount = dailySales.reduce((prev, curr) => prev + curr);
-    var weeklySalesCount = weeklySales.reduce((prev, curr) => prev + curr);
-    var monthlySalesCount = monthlySales.reduce((prev, curr) => prev + curr);
-    var yearlySalesCount = yearlySales.reduce((prev, curr) => prev + curr);
-    var totalSalesCount = totalSales.reduce((prev, curr) => prev + curr);
+    if (dailySales.length > 0) {
+        dailySalesCount = dailySales.reduce((prev, curr) => prev + curr);
+    }
+    if (weeklySales.length > 0) {
+    	weeklySalesCount = weeklySales.reduce((prev, curr) => prev + curr);
+    }
+	if (monthlySales.length > 0) {
+        monthlySalesCount = monthlySales.reduce((prev, curr) => prev + curr);
+    }
+    if (yearlySales.length > 0) {
+    	yearlySalesCount = yearlySales.reduce((prev, curr) => prev + curr);
+    }
+    totalSalesCount = totalSales.reduce((prev, curr) => prev + curr);
 
     var targetEl = document.querySelector('#pricehistory');
 
